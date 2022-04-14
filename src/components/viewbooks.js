@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { setTokenSession } from '../Utils/Common';
+import { setTokenSession } from '../Utils/Common'; //importing setToken function from Utils
 
 
 function ViewBooks({ books }) {
@@ -46,12 +46,17 @@ function ViewBooks({ books }) {
                 display: "flex",
                 flexWrap: "wrap",
             }}>
-                {books[secondpage]?.content.split(" ").map((word) => {
+                {
+            //split the paragraph into array so as to render each array word alone and to add an onclick function
+                books[secondpage]?.content.split(" ").map((word) => {
                     return (<div
                         style={{ padding: 5, cursor: "pointer" }}
                         onClick={() => {
                             let index = books[secondpage]?.content.split(" ").indexOf(word);
+
+                            //get the index of the word and using it to get the position in the token
                             let token = books[secondpage]?.tokens[index].position;
+                            //store the gotten token to a session storage
                             setTokenSession(token)
                             navigate('/displaytoken')
                         }}>
@@ -70,12 +75,18 @@ function ViewBooks({ books }) {
                 display: "flex",
                 flexWrap: "wrap",
             }}>
-                {books[firstpage]?.content.split(" ").map((word) => {
+                
+                {
+                     //split the paragraph into array so as to render each array word alone and to add an onclick function
+                books[firstpage]?.content.split(" ").map((word) => {
                     return (<div
                         style={{ padding: 5, cursor: "pointer" }}
                         onClick={() => {
                             let index = books[firstpage]?.content.split(" ").indexOf(word);
+                            
+                            //get the index of the word and using it to get the position in the token
                             let token = books[firstpage]?.tokens[index].position;
+                             //store the gotten token to a session storage
                             setTokenSession(token)
                             navigate('/displaytoken')
                         }}>
